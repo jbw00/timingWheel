@@ -1,0 +1,57 @@
+server:
+  context-path: /timeround
+  port: 8111
+
+info:
+  build:
+    artifact: '@project.artifactId@'
+    description: '@project.description@'
+    groupId: '@project.groupId@'
+    name: '@project.name@'
+    version: '@project.version@'
+
+#eureka client 配置
+eureka:
+  instance:
+    leaseExpirationDurationInSeconds: 30
+    leaseRenewalIntervalInSeconds: 10
+    preferIpAddress: true
+    status-page-url-path: ${server.context-path}/swagger-ui.html
+  client:
+    healthcheck:
+      enabled: true
+
+feign:
+  hystrix:
+    enabled: false
+
+spring:
+  application:
+    name: operations-timeround-server
+  datasource:
+    connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=3000
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      initial-size: 10
+      max-active: 100
+      max-pool-prepared-statement-per-connection-size: 50
+      max-wait: 5000
+      min-evictable-idle-time-millis: 300000
+      min-idle: 5
+      pool-prepared-statements: true
+      query-timeout: 5000
+      remove-abandoned: false
+      remove-abandoned-timeout: 1800
+      test-on-borrow: true
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      transaction-query-timeout: 5000
+      validation-query: SELECT 'x'
+    filters: stat,wall
+    use-global-dataSource-stat: true
+  output:
+    ansi:
+      enabled: ALWAYS
+  profiles:
+    active: @profiles.active@

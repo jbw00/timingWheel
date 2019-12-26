@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <!--控制台输出-->
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <!--输出格式-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+    <!--DEBUG日志输出-->
+    <appender name="debugLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--解码格式-->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+        <!--级别过滤器-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <!--符合级别执行归类-->
+            <onMatch>ACCEPT</onMatch>
+            <!--不符合级别抛弃过滤器-->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>${user.dir}/logs/springlog-debug-%d</fileNamePattern>
+            <!--保留1天-->
+            <maxHistory>1</maxHistory>
+            <!--共计保留50MB日志，超出覆盖-->
+            <totalSizeCap>50MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+    <!--INFO日志输出-->
+    <appender name="infoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--解码格式-->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <!--符合级别执行归类-->
+            <onMatch>ACCEPT</onMatch>
+            <!--不符合级别抛弃过滤器-->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>${user.dir}/logs/springlog-info-%d</fileNamePattern>
+            <!--保留3天-->
+            <maxHistory>3</maxHistory>
+            <!--共计保留150MB日志，超出覆盖-->
+            <totalSizeCap>150MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+    <!--WARN日志输出-->
+    <appender name="warnLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--解码格式-->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <!--符合级别执行归类-->
+            <onMatch>ACCEPT</onMatch>
+            <!--不符合级别抛弃过滤器-->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>${user.dir}/logs/springlog-warn-%d</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <!--ERROR日志输出-->
+    <appender name="errorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--解码格式-->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <!--符合级别执行归类-->
+            <onMatch>ACCEPT</onMatch>
+            <!--不符合级别抛弃过滤器-->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>${user.dir}/logs/springlog-error-%d</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <!--全局日志输出-->
+    <appender name="fileLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--解码格式-->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>${user.dir}/logs/springlog-%d</fileNamePattern>
+            <!--保留7天-->
+            <maxHistory>7</maxHistory>
+            <!--共计保留350MB日志，超出覆盖-->
+            <totalSizeCap>350MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <!--全局应用默认日志配置-->
+    <root level="info">
+        <!--引用输出地址-->
+        <appender-ref ref = "consoleLog"/>
+        <appender-ref ref = "fileLog"/>
+        <appender-ref ref="errorLog"/>
+        <appender-ref ref="warnLog"/>
+        <appender-ref ref="infoLog"/>
+        <appender-ref ref="debugLog"/>
+    </root>
+
+    <!--指定对象应用日志配置-->
+    <logger name="com.chinamobile.operations.project.seed.mybatis" level="info" additivity="false">
+        <appender-ref ref="fileLog" />
+        <appender-ref ref="errorLog"/>
+        <appender-ref ref="warnLog"/>
+        <appender-ref ref="infoLog"/>
+        <appender-ref ref="debugLog"/>
+    </logger>
+
+    <logger name="com.chinamobile.operations.project.timeround" level="debug" additivity="false">
+        <appender-ref ref="fileLog" />
+        <appender-ref ref="errorLog"/>
+        <appender-ref ref="warnLog"/>
+        <appender-ref ref="infoLog"/>
+        <appender-ref ref="debugLog"/>
+        <appender-ref ref ="consoleLog"/>
+    </logger>
+
+</configuration>

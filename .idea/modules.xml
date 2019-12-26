@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/operations-timeround.iml" filepath="$PROJECT_DIR$/operations-timeround.iml" />
+      <module fileurl="file://$PROJECT_DIR$/operations-timeround-client/operations-timeround-client.iml" filepath="$PROJECT_DIR$/operations-timeround-client/operations-timeround-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/operations-timeround-server/operations-timeround-server.iml" filepath="$PROJECT_DIR$/operations-timeround-server/operations-timeround-server.iml" />
+    </modules>
+  </component>
+</project>

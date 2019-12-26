@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="context1" targetRuntime="MyBatis3">
+        <jdbcConnection
+                driverClass="com.mysql.jdbc.Driver"
+                connectionURL="jdbc:mysql://192.168.184.205/apply"
+                userId="falcon"
+                password="!QAZ1qaz" ></jdbcConnection>
+        <javaModelGenerator targetPackage="${groupId}.${artifactId}.model"
+                            targetProject="${project.path}/src/main/java"/>
+        <sqlMapGenerator targetPackage="mybatis/base" targetProject="${project.path}/src/main/resources"/>
+        <javaClientGenerator targetPackage="${groupId}.${artifactId}.dao.base"
+                             targetProject="${project.path}/src/main/java" type="XMLMAPPER"/>
+        <table tableName="upgrade_apply_plan"></table>
+        <table tableName="upgrade_apply_plan_product_real"></table>
+    </context>
+</generatorConfiguration>
